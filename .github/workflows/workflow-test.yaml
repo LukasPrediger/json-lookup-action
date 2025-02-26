@@ -6,6 +6,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Key returns value
         id: keyReturnsValue
         uses: ./
