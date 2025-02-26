@@ -1,0 +1,19 @@
+name: Workflow Tests
+on:
+  workflow_call: {}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Key returns value
+        id: keyReturnsValue
+        uses: ./
+        with:
+          json: '{"key": "value2"}'
+          key: "key"
+      - name: Check value
+        if: steps.keyReturnsValue.outputs.value != 'value'
+        run: |
+          echo "::error title=TEST FAILED::Expected value to be 'value' but was '${{ steps.keyReturnsValue.outputs.value }}'"
+          exit 1

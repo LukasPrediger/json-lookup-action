@@ -37,3 +37,6 @@ jobs:
         with:
           files: |
             test-results/**/*.xml
+
+  workflow-test:
+    uses: ./.github/workflows/workflow-test.yaml
