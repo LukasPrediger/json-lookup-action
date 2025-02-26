@@ -5,6 +5,10 @@ on:
     types:
       - released
       - edited
+
+permissions:
+  contents: write
+
 jobs:
   bump-tag:
     runs-on: ubuntu-latest
