@@ -6,6 +6,10 @@
 /** @type {import('jest').Config} */
 const config = {
   preset: 'rollup-jest',
+  reporters: [
+    'default',
+    ['jest-junit', {outputDirectory: 'test-results', outputName: 'report.xml'}]
+  ]
 };
 
 export default config;
