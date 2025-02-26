@@ -12,7 +12,7 @@ jobs:
         id: keyReturnsValue
         uses: ./
         with:
-          json: '{"key": "value2"}'
+          json: '{"key": "value"}'
           key: "key"
       - name: Check value
         if: steps.keyReturnsValue.outputs.value != 'value'
