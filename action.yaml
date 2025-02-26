@@ -1,0 +1,21 @@
+name: Json Lookup
+description: Looks-up a single value from a flat json object
+
+runs:
+  using: node20
+  main: dist/action.js
+
+inputs:
+  key:
+    description: The key to look up
+    required: true
+    type: string
+  json:
+    description: The json object to look up the key in
+    required: true
+    type: string
+
+outputs:
+  value:
+    description: The value of the key in the json object
+    type: string
