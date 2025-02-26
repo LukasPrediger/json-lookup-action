@@ -6,9 +6,23 @@ on:
       - released
       - edited
 jobs:
-  actions-tagger:
+  bump-tag:
     runs-on: ubuntu-latest
     steps:
-      - uses: Actions-R-Us/actions-tagger@v2
-        with:
-          publish_latest_tag: true
+      - uses: actions/checkout@v4
+
+      - name: Get release metadata
+        id: metadata
+        run: |
+          echo "tag=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+          echo "commit=${{ github.event.release.target_commitish }}" >> $GITHUB_OUTPUT
+
+      - name: Parse version from tag
+        id: parse-tag
+        uses: release-kit/semver@v2
+
+      - name: Bump tag
+        run: |
+          git tag -d v${{ steps.parse-tag.outputs.major }} || true
+          git tag v${{ steps.parse-tag.outputs.major }}
+          git push origin --tags --force
