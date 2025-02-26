@@ -18,4 +18,3 @@ inputs:
 outputs:
   value:
     description: The value of the key in the json object
-    type: string
