@@ -4,8 +4,8 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: {}
-  workflow_call: {}
+  workflow_dispatch: { }
+  workflow_call: { }
 
 jobs:
   verify:
@@ -17,6 +17,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: package.json
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: test
         run: yarn test
