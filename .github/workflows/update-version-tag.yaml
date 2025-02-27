@@ -29,4 +29,4 @@ jobs:
         run: |
           git tag -d v${{ steps.parse-tag.outputs.major }} || true
           git tag v${{ steps.parse-tag.outputs.major }}
-          git push origin --tags --force
+          git push --tags --force
