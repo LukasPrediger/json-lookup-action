@@ -20,7 +20,7 @@ describe("lookup should return correct value of type", () => {
 describe('lookup should throw an error if', () => {
   test('the json is empty', () => {
     const jsonString = '';
-    expect(() => lookup(jsonString, 'key')).toThrow();
+    expect(() => lookup(jsonString, 'key')).toThrow(Error("Empty JSON"));
   })
   test('the json is invalid', () => {
     const jsonString = 'invalid';
@@ -28,8 +28,17 @@ describe('lookup should throw an error if', () => {
   })
   test('the key is empty', () => {
     const jsonString = '{"key": "value"}';
-    expect(() => lookup(jsonString, '')).toThrow();
+    expect(() => lookup(jsonString, '')).toThrow(Error("Empty key"));
   })
+  test.each([
+    ['array', '["key", "value"]'],
+    ['null', 'null'],
+    ['number', '15'],
+    ['string', '"value"'],
+  ])('the json is of type: %s', (_, jsonString) => {
+    expect(() => lookup(jsonString, 'key')).toThrow(Error("JSON is not an object"));
+  })
+
 });
 
 test('lookup should return and empty string for a missing key', () => {

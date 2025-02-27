@@ -9,7 +9,11 @@ export default function lookup (jsonString, key) {
 
   if (!key) throw new Error('Empty key')
 
-  const value = JSON.parse(jsonString)[key]
+  const parsedObject = JSON.parse(jsonString);
+
+  if (parsedObject?.constructor !== Object) throw new Error("JSON is not an object")
+
+  const value = parsedObject[key]
 
   if (typeof value === 'object') {
     return JSON.stringify(value)
