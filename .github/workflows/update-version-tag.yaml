@@ -27,6 +27,10 @@ jobs:
 
       - name: Bump tag
         run: |
+          git tag -d latest || true
+          git tag latest
+          
           git tag -d v${{ steps.parse-tag.outputs.major }} || true
           git tag v${{ steps.parse-tag.outputs.major }}
+          
           git push --tags --force
